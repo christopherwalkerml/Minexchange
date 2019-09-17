@@ -1,0 +1,43 @@
+name: MineXChange
+version: 1.10.2
+author: Darkolythe
+main: me.darkolythe.minexchange.MineXChange
+api-version: 1.13
+description: This plugin lets player request items through an inventory. requests can be fulfilled while the requesting player is offline
+
+commands:
+    minexchange:
+        usage: /<command>
+        aliases: [mxc]
+        description: the minechange command
+        permission: minexchange.command
+        permission-message: You do not have permission!
+
+permissions:
+    minexchange.command:
+        description: Allows the use of minechange commands
+        default: op
+    minexchange.add:
+        description: Allows the adding of item requests
+        default: true
+    minexchange.override:
+        description: Allows the player to delete an item request, even if they didnt create the request (for admins)
+        default: op
+    minexchange.setcooldown:
+        description: Allows the player to set the request cooldown timer of a player
+        default: op
+    minexchange.interact:
+        description: Allows the player to click the NPC to open the minexchange inventory
+        default: true
+    minexchange.token:
+        description: Allows the player to create a token that can turn any entity (except players) into an MXC entity
+        default: op
+    minexchange.nodelay:
+        description: Allows the player to bypass the request creation delay
+        default: op
+    minexchange.openothers:
+        description: Allows the player to open other mxc inventories
+        default: op
+    minexchange.reload:
+        description: Reloads all the mxc files
+        default: op

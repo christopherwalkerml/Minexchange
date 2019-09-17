@@ -1,0 +1,12 @@
+#This value is the maximum amount of items a player can request at a time
+cooldown: 2h
+timeout: 7d
+maxrequestamount: 10000
+broadcastrequest: true
+#use & for chat colour codes
+#%prefix% = [MXC] prefix
+#%requestamount% = request amount
+#%requestitem% = request item name
+#%rewardamount% = reward amount
+#%rewarditem% = reward item name
+broadcastmessage: "%prefix%&aA request for %requestamount% %requestitem% &ahas been created!"
