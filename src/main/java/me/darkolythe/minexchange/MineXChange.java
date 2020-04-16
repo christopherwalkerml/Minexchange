@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -37,6 +38,7 @@ public class MineXChange extends JavaPlugin implements Listener {
 	public ExchangeInventory exchangeinventory;
 	public ConfigManager configmanager;
 	public Notifier notifier;
+	public SearchMenu searchmenu;
 	
 	public Request[] requestlist = new Request[45];
 	public HashMap<UUID, ArrayList<ItemStack>> requestsinventory = new HashMap<>();
@@ -46,7 +48,11 @@ public class MineXChange extends JavaPlugin implements Listener {
 	public HashMap<UUID, ArrayList<String>> exchangecontributions = new HashMap<>();
 	public static ArrayList<String> requestids = new ArrayList<>();
 	public HashMap<UUID, Boolean> notifylist = new HashMap<>();
-	
+
+	public static HashMap<Player, String> textList = new HashMap<>();
+	public static HashMap<Player, String> bufferText = new HashMap<>();
+	public static HashMap<Player, Inventory> storedCreateInventory = new HashMap<>();
+
 	public int maxrequestamount;
 	
 	
@@ -65,7 +71,8 @@ public class MineXChange extends JavaPlugin implements Listener {
 		requestinventory = new RequestInventory(plugin);
 		exchangeinventory = new ExchangeInventory(plugin);
 		notifier = new Notifier(plugin);
-		
+		searchmenu = new SearchMenu(plugin);
+
 		configmanager = new ConfigManager(plugin);
 		configmanager.setup();
 		configmanager.loadRequestList();
@@ -75,6 +82,7 @@ public class MineXChange extends JavaPlugin implements Listener {
 		configmanager.reloadAll(null);
 		
 		notifier.broadcast();
+		searchmenu.useText();
 		requestinventory.checkConfirm();
 
 		Metrics metrics = new Metrics(plugin);
@@ -83,6 +91,7 @@ public class MineXChange extends JavaPlugin implements Listener {
 		getServer().getPluginManager().registerEvents(createrequestmenu, this);
 		getServer().getPluginManager().registerEvents(requestinventory, this);
 		getServer().getPluginManager().registerEvents(exchangeinventory, this);
+		getServer().getPluginManager().registerEvents(searchmenu, this);
 		getServer().getPluginManager().registerEvents(this, this);
 		getCommand("minexchange").setExecutor(new MinechangeCommand());
 		

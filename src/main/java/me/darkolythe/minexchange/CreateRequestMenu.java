@@ -216,7 +216,10 @@ public class CreateRequestMenu implements Listener {
 								 */
 								if (event.getRawSlot() == middle1) {
 									if (crinv.getItem(middle1).getType() == Material.BEDROCK) {
-										System.out.println("search time");
+										MineXChange.textList.put(player, "desired");
+										MineXChange.storedCreateInventory.put(player, event.getInventory());
+										player.closeInventory();
+										player.sendMessage(MineXChange.prefix + "Enter item to search for. Type 'cancel' to return.");
 									} else {
 										ItemStack reqstack = new ItemStack(Material.BEDROCK, 1);
 										ItemMeta reqmeta = reqstack.getItemMeta();
@@ -228,7 +231,10 @@ public class CreateRequestMenu implements Listener {
 									}
 								} else if (event.getRawSlot() == middle2) {
 									if (crinv.getItem(middle2).getType() == Material.BEDROCK) {
-										System.out.println("search time");
+										MineXChange.textList.put(player, "reward");
+										MineXChange.storedCreateInventory.put(player, event.getInventory());
+										player.closeInventory();
+										player.sendMessage(MineXChange.prefix + "Enter item to search for. Type 'cancel' to return.");
 									} else {
 										ItemStack reqstack = new ItemStack(Material.BEDROCK, 1);
 										ItemMeta reqmeta = reqstack.getItemMeta();
