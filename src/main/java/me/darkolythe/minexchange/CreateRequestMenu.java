@@ -271,7 +271,7 @@ public class CreateRequestMenu implements Listener {
 			}
 		} else {
 			Player player = (Player) event.getWhoClicked();
-			if (event.getClickedInventory() != null && event.getClickedInventory() != player.getInventory()) {
+			if (event.getClickedInventory() != null) {
 				if (event.getView().getTitle().equals(ChatColor.RED.toString() + ChatColor.BOLD.toString() + "Create A Request")) { //if its the right clicked inventory
 					event.setCancelled(true);
 				}
