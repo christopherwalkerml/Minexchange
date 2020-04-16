@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,6 +14,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -40,6 +42,7 @@ public class CreateRequestMenu implements Listener {
 		ItemStack reqstack = new ItemStack(Material.BEDROCK, 1);
 		ItemMeta reqmeta = reqstack.getItemMeta();
 		reqmeta.setDisplayName(ChatColor.GREEN.toString() + ChatColor.BOLD.toString() + "Drag Desired Item Here"); //Placeholder item
+		reqmeta.setLore(Arrays.asList(ChatColor.GRAY + "or click with empty cursor to search for item"));
 		reqstack.setItemMeta(reqmeta);
 		crinv.setItem(middle1, reqstack);
 		
@@ -48,6 +51,7 @@ public class CreateRequestMenu implements Listener {
 		reqstack = new ItemStack(Material.BEDROCK, 1);
 		reqmeta = reqstack.getItemMeta();
 		reqmeta.setDisplayName(ChatColor.GREEN.toString() + ChatColor.BOLD.toString() + "Drag Reward Item Here"); //Placeholder item
+		reqmeta.setLore(Arrays.asList(ChatColor.GRAY + "or click with empty cursor to search for item"));
 		reqstack.setItemMeta(reqmeta);
 		crinv.setItem(middle2, reqstack);
 		
@@ -64,7 +68,7 @@ public class CreateRequestMenu implements Listener {
 		reqmeta.setDisplayName(ChatColor.GREEN.toString() + ChatColor.BOLD.toString() + "Create Request");
 		reqstack.setItemMeta(reqmeta);
 		crinv.setItem(51, reqstack);
-		
+
 		
 		return crinv;
 		
@@ -211,19 +215,29 @@ public class CreateRequestMenu implements Listener {
 								 * If player removes items from reward / request with empty hand
 								 */
 								if (event.getRawSlot() == middle1) {
-									ItemStack reqstack = new ItemStack(Material.BEDROCK, 1);
-									ItemMeta reqmeta = reqstack.getItemMeta();
-									reqmeta.setDisplayName(ChatColor.GREEN.toString() + ChatColor.BOLD.toString() + "Drag Desired Item Here"); //Placeholder item
-									reqstack.setItemMeta(reqmeta);
-									crinv.setItem(middle1, reqstack);
-									createIncDecRow(crinv, middle1, main.maxrequestamount, 0);
+									if (crinv.getItem(middle1).getType() == Material.BEDROCK) {
+										System.out.println("search time");
+									} else {
+										ItemStack reqstack = new ItemStack(Material.BEDROCK, 1);
+										ItemMeta reqmeta = reqstack.getItemMeta();
+										reqmeta.setDisplayName(ChatColor.GREEN.toString() + ChatColor.BOLD.toString() + "Drag Desired Item Here"); //Placeholder item
+										reqmeta.setLore(Arrays.asList(ChatColor.GRAY + "or click with empty cursor to search for item"));
+										reqstack.setItemMeta(reqmeta);
+										crinv.setItem(middle1, reqstack);
+										createIncDecRow(crinv, middle1, main.maxrequestamount, 0);
+									}
 								} else if (event.getRawSlot() == middle2) {
-									ItemStack reqstack = new ItemStack(Material.BEDROCK, 1);
-									ItemMeta reqmeta = reqstack.getItemMeta();
-									reqmeta.setDisplayName(ChatColor.GREEN.toString() + ChatColor.BOLD.toString() + "Drag Reward Item Here"); //Placeholder item
-									reqstack.setItemMeta(reqmeta);
-									crinv.setItem(middle2, reqstack);
-									createIncDecRow(crinv, middle2, main.maxrequestamount, 0);
+									if (crinv.getItem(middle2).getType() == Material.BEDROCK) {
+										System.out.println("search time");
+									} else {
+										ItemStack reqstack = new ItemStack(Material.BEDROCK, 1);
+										ItemMeta reqmeta = reqstack.getItemMeta();
+										reqmeta.setDisplayName(ChatColor.GREEN.toString() + ChatColor.BOLD.toString() + "Drag Reward Item Here"); //Placeholder item
+										reqmeta.setLore(Arrays.asList(ChatColor.GRAY + "or click with empty cursor to search for item"));
+										reqstack.setItemMeta(reqmeta);
+										crinv.setItem(middle2, reqstack);
+										createIncDecRow(crinv, middle2, main.maxrequestamount, 0);
+									}
 								}
 							}
 

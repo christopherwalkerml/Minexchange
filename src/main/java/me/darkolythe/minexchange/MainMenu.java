@@ -18,6 +18,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -75,6 +76,7 @@ public class MainMenu implements Listener {
 		ItemStack menustack = new ItemStack(Material.SUNFLOWER, 1);
 		ItemMeta menumeta = menustack.getItemMeta();
 		menumeta.setDisplayName(ChatColor.YELLOW.toString() + ChatColor.BOLD.toString() + "Create Request"); // create the create request itemstack
+		menumeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		menustack.setItemMeta(menumeta);
 		menustack.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
 		menuinv.setItem(47, menustack);
@@ -176,35 +178,19 @@ public class MainMenu implements Listener {
 	@EventHandler
 	public void onNPCInteract(PlayerInteractEntityEvent event) {
 		Player player = event.getPlayer();
-		if (player.hasPermission("minexchange.token")) {
-			if (player.getInventory().getItemInMainHand().equals(getToken())) {
-				event.setCancelled(true);
-				if (event.getHand() == EquipmentSlot.HAND) {
-					Entity e = event.getRightClicked();
-					if (e.hasMetadata("ismxc")) {
-						e.removeMetadata("ismxc", main);
-						player.sendMessage(main.prefix + ChatColor.RED + "Entity is no longer an MXC entity");
-					} else {
-						e.setMetadata("ismxc", new FixedMetadataValue(main, true));
-						player.sendMessage(main.prefix + ChatColor.GREEN + "Entity is now an MXC entity");
-					}
-				}
-			}
-		}
 		if (player.hasPermission("minexchange.interact")) {
-			if (event.getRightClicked().hasMetadata("ismxc")) {
+			if (event.getRightClicked().getCustomName() != null && event.getRightClicked().getCustomName().equals(ChatColor.BLUE.toString() + "MineXChange")) {
 				player.openInventory(createInventory(event.getPlayer()));
 			}
 		} else {
-			player.sendMessage(main.prefix + ChatColor.RED + "You do not have permission to use that");
+			player.sendMessage(MineXChange.prefix + ChatColor.RED + "You do not have permission to use that");
 		}
 	}
 
-	public ItemStack getToken() {
-		ItemStack token = new ItemStack(Material.SUNFLOWER, 1);
+	ItemStack getToken() {
+		ItemStack token = new ItemStack(Material.NAME_TAG);
 		ItemMeta meta = token.getItemMeta();
-		meta.setDisplayName(MineXChange.prefix + ChatColor.BLUE + "Token");
-		meta.setLore(Arrays.asList(ChatColor.GRAY + "Click any non-player entity to make them an MXC entity"));
+		meta.setDisplayName(ChatColor.BLUE.toString() + "MineXChange");
 		token.setItemMeta(meta);
 		return token;
 	}

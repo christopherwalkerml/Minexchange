@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -75,6 +76,8 @@ public class MineXChange extends JavaPlugin implements Listener {
 		
 		notifier.broadcast();
 		requestinventory.checkConfirm();
+
+		Metrics metrics = new Metrics(plugin);
 		
 		getServer().getPluginManager().registerEvents(menu, this); //register events from other classes
 		getServer().getPluginManager().registerEvents(createrequestmenu, this);

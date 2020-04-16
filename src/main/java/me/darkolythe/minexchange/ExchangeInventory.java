@@ -262,7 +262,6 @@ public class ExchangeInventory implements Listener {
 			invstack.setItemMeta(invmeta);
 			inv.setItem(45, invstack);
 		}
-		
 	}
 
 
