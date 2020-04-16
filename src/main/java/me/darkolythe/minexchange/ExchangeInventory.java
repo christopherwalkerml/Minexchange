@@ -215,6 +215,11 @@ public class ExchangeInventory implements Listener {
 					}
 				}
 			}
+		} else if (event.getClickedInventory().equals(player.getInventory())) {
+			if (event.getView().getTitle().equals(ChatColor.BLUE.toString() + ChatColor.BOLD.toString() + "Exchange Inventory - Requests") ||
+					event.getView().getTitle().equals(ChatColor.BLUE.toString() + ChatColor.BOLD.toString() + "Exchange Inventory - Rewards")) { //if its the right inventory
+				event.setCancelled(true);
+			}
 		}
 	}
 	

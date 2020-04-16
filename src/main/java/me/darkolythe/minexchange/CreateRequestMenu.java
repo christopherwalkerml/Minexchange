@@ -268,9 +268,14 @@ public class CreateRequestMenu implements Listener {
 					}
 					event.setCancelled(true);
 				}
+			} else if (event.getClickedInventory() != null && event.getClickedInventory().equals(player.getInventory())) {
+				if (event.getView().getTitle().equals(ChatColor.RED.toString() + ChatColor.BOLD.toString() + "Create A Request")) { //if its the right clicked inventory
+					if (event.isShiftClick()) {
+						event.setCancelled(true);
+					}
+				}
 			}
 		} else {
-			Player player = (Player) event.getWhoClicked();
 			if (event.getClickedInventory() != null) {
 				if (event.getView().getTitle().equals(ChatColor.RED.toString() + ChatColor.BOLD.toString() + "Create A Request")) { //if its the right clicked inventory
 					event.setCancelled(true);
