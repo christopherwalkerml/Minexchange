@@ -112,27 +112,32 @@ public class MainMenu implements Listener {
 	public void onInventoryClick(InventoryClickEvent event) {
 		Player player = (Player) event.getWhoClicked(); // if the right inventory is open
 		System.out.println("MXC - debug - 114");
+		for (char c : event.getView().getTitle().toCharArray()) {
+			System.out.print(c + " ");
+		}
+		System.out.println("");
+		System.out.println(event.getView().getTitle().equals(ChatColor.RED.toString() + ChatColor.BOLD.toString() + "MineXChange"));
 		if (event.getView().getTitle().equals(ChatColor.RED.toString() + ChatColor.BOLD.toString() + "MineXChange")) {
-			System.out.println("MXC - debug - 116");
+			System.out.println("MXC - debug - 117");
 			if (event.getClickedInventory() != null && event.getClickedInventory().getType() == InventoryType.CHEST) {
-				System.out.println("MXC - debug - 118");
+				System.out.println("MXC - debug - 119");
 				if (event.getClickedInventory() != null) {
-					System.out.println("MXC - debug - 120");
+					System.out.println("MXC - debug - 121");
 					if (player.getItemOnCursor().getType() == Material.AIR) { // if the player clicks "create" request with nothing on their cursor
-						System.out.println("MXC - debug - 122");
+						System.out.println("MXC - debug - 123");
 						ItemStack clickstack = event.getCurrentItem();
 						if (clickstack != null && clickstack.getType() != Material.AIR) {
-							System.out.println("MXC - debug - 125");
+							System.out.println("MXC - debug - 126");
 							if (clickstack.getItemMeta().hasDisplayName()) {
-								System.out.println("MXC - debug - 127");
+								System.out.println("MXC - debug - 128");
 								if (clickstack.getType() == Material.SUNFLOWER) {
-									System.out.println("MXC - debug - 129");
+									System.out.println("MXC - debug - 130");
 									if (clickstack.getItemMeta().getDisplayName().equals(ChatColor.YELLOW.toString() + ChatColor.BOLD.toString() + "Create Request")) {
-										System.out.println("MXC - debug - 131");
+										System.out.println("MXC - debug - 132");
 										if (player.hasPermission("minexchange.add")) {
-											System.out.println("MXC - debug - 133");
+											System.out.println("MXC - debug - 134");
 											if (main.getCooldown(player.getUniqueId()) == 0 || player.hasPermission("minexchange.nodelay")) {
-												System.out.println("MXC - debug - 135");
+												System.out.println("MXC - debug - 136");
 												event.setCancelled(true); // create the requestmenu inventory, and make the player open it
 												player.openInventory(createrequestmenu.createInventory(main.maxrequestamount));
 											} else {
