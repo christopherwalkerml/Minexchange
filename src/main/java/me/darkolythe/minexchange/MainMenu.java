@@ -112,7 +112,7 @@ public class MainMenu implements Listener {
 	public void onInventoryClick(InventoryClickEvent event) {
 		Player player = (Player) event.getWhoClicked(); // if the right inventory is open
 		System.out.println("MXC - debug - 114");
-		if (player.getOpenInventory().getTitle().equals(ChatColor.RED.toString() + ChatColor.BOLD.toString() + "MineXChange")) {
+		if (event.getView().getTitle().equals(ChatColor.RED.toString() + ChatColor.BOLD.toString() + "MineXChange")) {
 			System.out.println("MXC - debug - 116");
 			if (event.getClickedInventory() != null && event.getClickedInventory().getType() == InventoryType.CHEST) {
 				System.out.println("MXC - debug - 118");
