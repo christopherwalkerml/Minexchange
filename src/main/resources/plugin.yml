@@ -1,5 +1,5 @@
 name: MineXChange
-version: 1.11.0
+version: 1.11.1
 author: Darkolythe
 main: me.darkolythe.minexchange.MineXChange
 api-version: 1.13
@@ -19,7 +19,7 @@ permissions:
         default: op
     minexchange.add:
         description: Allows the adding of item requests
-        default: true
+        default: op
     minexchange.override:
         description: Allows the player to delete an item request, even if they didnt create the request (for admins)
         default: op
